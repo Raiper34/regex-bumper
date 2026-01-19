@@ -1,0 +1,9 @@
+{
+    "files": [
+        {"path": "./test.txt", "regex": "version = (\\d+)", "flags": "g"},
+        {"path": "{HOME}/test.txt", "regex": "version = (\\d+)", "flags": "g"},
+        {"path": "{VAR}/test.txt", "regex": "version = (\\d+)", "flags": "g"},
+        {"path": "./test.txt", "regex": "nonexistent", "flags": "g"},
+        {"path": "./nonexistent.txt", "regex": "version = (\\d+)", "flags": "g"}
+    ]
+}
