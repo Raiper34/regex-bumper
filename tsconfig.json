@@ -3,11 +3,9 @@
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "lib": [
-      "es2015",
-      "scripthost",
-      "es2015.promise",
-      "es2015.generator",
-      "es2015.iterable",
+      "es2020",
+      "es2020.string",
+      "es2020.promise",
       "dom"
     ],
     "module": "commonjs",
@@ -19,7 +17,7 @@
     //"inlineSourceMap": true,
     "outDir": "build",
     "strict": false,
-    "target": "es5",
+    "target": "es2020",
     "declaration": true,
     "declarationDir": "build/types"
   },
