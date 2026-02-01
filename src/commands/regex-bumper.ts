@@ -124,7 +124,7 @@ const command: GluegunCommand = {
         print,
         filesystem,
         prompt,
-        parameters.options.val,
+        parameters.options.value,
         varPathFile
       ))
   },

@@ -56,7 +56,7 @@ test('outputs version', async () => {
 
 test('should bump with value provided by value parameter', async () => {
   initTestFile('simple')
-  const output = await cli(`--config ${getRcPath('simple')} --val 100`)
+  const output = await cli(`--config ${getRcPath('simple')} --value 100`)
   expect(output).toContain(getStringMessage('✓ CHANGED'))
   expect(getTestFileContent()).toBe(getExpectedFileContent('simple-value'))
 })
@@ -70,13 +70,13 @@ test('should bump by 1 when no value parameter', async () => {
 
 test('should not modify file when nothing to modify', async () => {
   initTestFile('simple')
-  const output = await cli(`--config ${getRcPath('simple')} --val 1`)
+  const output = await cli(`--config ${getRcPath('simple')} --value 1`)
   expect(output).toContain(getStringMessage('❌ NOT CHANGED'))
   expect(getTestFileContent()).toBe(getOriginalFileContent('simple'))
 })
 
-test('should not modify file when nothing to modify', async () => {
-  const output = await cli(`--config ${getRcPath('nonexisting')} --val 1`)
+test('should not modify file when not exist', async () => {
+  const output = await cli(`--config ${getRcPath('nonexisting')}`)
   expect(output).toContain(getStringMessage('❌ NOT EXIST', 'nonexisting'))
 })
 

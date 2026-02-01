@@ -1,7 +1,18 @@
 {
   "name": "regex-bumper",
-  "version": "0.0.1",
-  "description": "regex-bumper CLI",
+  "version": "1.0.0",
+  "description": "Cli tool to bump numbers in files based on regexes",
+  "keywords": [
+    "bump",
+    "version bump",
+    "number bump",
+    "bumper",
+    "regex bumper"
+  ],
+  "repository": "https://github.com/Raiper34/regex-bumper",
+  "homepage": "https://github.com/Raiper34/regex-bumper",
+  "author": "Raiper34",
+  "license": "MIT",
   "types": "build/types/types.d.ts",
   "bin": {
     "regex-bumper": "bin/regex-bumper"
@@ -25,7 +36,6 @@
     "docs",
     "bin"
   ],
-  "license": "MIT",
   "dependencies": {
     "gluegun": "latest"
   },
