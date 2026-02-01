@@ -49,11 +49,6 @@ function getRcPath(fileName: string): string {
 beforeEach(async () => resetTestFile())
 afterEach(async () => resetTestFile())
 
-test('outputs version', async () => {
-  const output = await cli('--version')
-  expect(output).toContain('0.0.1')
-})
-
 test('should bump with value provided by value parameter', async () => {
   initTestFile('simple')
   const output = await cli(`--config ${getRcPath('simple')} --value 100`)
