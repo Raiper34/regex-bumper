@@ -1,0 +1,9 @@
+{
+  "varPathFile": "./__tests__/test.varpath.txt",
+  "files": [
+    {
+      "path": "./__tests__/{VAR1}/{VAR2}/test3.txt",
+      "regex": "\"version\"=\\((\\d+)\\)"
+    }
+  ]
+}

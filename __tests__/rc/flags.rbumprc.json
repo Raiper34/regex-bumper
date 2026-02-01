@@ -1,0 +1,9 @@
+{
+  "files": [
+    {
+      "path": "./__tests__/test1.txt",
+      "regex": "\"version\"=\\((\\d+)\\)",
+      "flags": "g"
+    }
+  ]
+}

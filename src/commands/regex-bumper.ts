@@ -7,6 +7,7 @@ import {
 
 interface Config {
   files: FileConfiguration[]
+  varPathFile?: string
 }
 interface FileConfiguration {
   path: string
@@ -15,7 +16,7 @@ interface FileConfiguration {
 }
 
 const RCFILE = '.rbumprc.json'
-const ENVFILE = '.env'
+const VARPATHFILE = '.varpath'
 const PATH_VAR_REGEX = /{([^}]+)}/g
 enum MSG {
   Changed = '✓ CHANGED',
@@ -27,9 +28,12 @@ async function getPathVar(
   variable: string,
   filesystem: GluegunFilesystem,
   prompt: GluegunPrompt,
-  env?: string
+  varPathFile?: string
 ): Promise<string> {
-  const envPath = filesystem.resolve(filesystem.cwd(), env ?? ENVFILE)
+  const envPath = filesystem.resolve(
+    filesystem.cwd(),
+    varPathFile ?? VARPATHFILE
+  )
   if (!filesystem.exists(envPath)) {
     filesystem.write(envPath, '')
   }
@@ -54,14 +58,14 @@ async function getPath(
   path: string,
   filesystem: GluegunFilesystem,
   prompt: GluegunPrompt,
-  env?: string
+  varPathFile?: string
 ): Promise<string> {
   let finalPath = path
   const matches = [...finalPath.matchAll(new RegExp(PATH_VAR_REGEX, 'g'))]
   for (const match of matches ?? []) {
     finalPath = finalPath.replace(
       `{${match[1]}}`,
-      await getPathVar(match[1], filesystem, prompt, env)
+      await getPathVar(match[1], filesystem, prompt, varPathFile)
     )
   }
   return filesystem.resolve(filesystem.cwd(), finalPath)
@@ -73,10 +77,10 @@ async function bumpFiles(
   fileSystem: GluegunFilesystem,
   prompt: GluegunPrompt,
   value?: string,
-  env?: string
+  varPathFile?: string
 ): Promise<void> {
   for (const file of files) {
-    const path = await getPath(file.path, fileSystem, prompt, env)
+    const path = await getPath(file.path, fileSystem, prompt, varPathFile)
     try {
       const fileContent = fileSystem.read(path)
       const fileChangedContent = fileContent.replace(
@@ -106,8 +110,11 @@ const command: GluegunCommand = {
       parameters.options.config ?? RCFILE
     )
     let files: FileConfiguration[] = []
+    let varPathFile = null
     try {
-      files = (filesystem.read(configPath, 'json') as Config).files
+      const config = filesystem.read(configPath, 'json') as Config
+      files = config.files
+      varPathFile = config.varPathFile
     } catch (e) {
       print.error(`Unable to read ${configPath} config file.`)
     }
@@ -118,7 +125,7 @@ const command: GluegunCommand = {
         filesystem,
         prompt,
         parameters.options.val,
-        parameters.options.env
+        varPathFile
       ))
   },
 }

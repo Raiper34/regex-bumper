@@ -1,0 +1,8 @@
+{
+  "files": [
+    {
+      "path": "./__tests__/nonexisting.txt",
+      "regex": "\"version\"=\\((\\d+)\\)"
+    }
+  ]
+}

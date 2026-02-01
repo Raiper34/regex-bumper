@@ -1,0 +1,13 @@
+{
+  "files": [
+    {
+      "path": "./__tests__/test1.txt",
+      "regex": "\"version\"=\\((\\d+)\\)"
+    },
+    {
+      "path": "./__tests__/test2.txt",
+      "regex": "\"version\"=\\((\\d+)\\)",
+      "flags": "g"
+    }
+  ]
+}
