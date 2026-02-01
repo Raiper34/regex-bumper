@@ -120,3 +120,10 @@ test('should modify files by user path vars', async () => {
     getExpectedFileContent('simple-no-value')
   )
 })
+
+test('should show error msg when non existing config used', async () => {
+  const output = await cli(`--config ./__tests__/nonexisting.json`)
+  expect(output).toContain(
+    `Unable to read ${__dirname}/nonexisting.json config file`
+  )
+})
